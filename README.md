@@ -35,7 +35,7 @@ I denne oppgaven står du veldig fritt til å gjøre som du vil, i motsetning ti
 
 ## Innlevering
 
-Oppgaven leveres inn ved å pushe til GitLab (Team → Commit → Commit and push). [Se instruksjonene fra Lab 1(lab-1). Husk å få med eventuelle nye filer du har opprettet (hvis testene virker hos deg, men ikke i innleveringssystemet, er det gjerne det som er feil).
+Oppgaven leveres inn ved å pushe til GitLab (Team → Commit → Commit and push). [Se instruksjonene fra Lab 1](https://retting.ii.uib.no/inf101/inf101v17/wikis/lab-1). Husk å få med eventuelle nye filer du har opprettet (hvis testene virker hos deg, men ikke i innleveringssystemet, er det gjerne det som er feil).
 
 Som før skal du ha et repository for oppgaven på retting.ii.uib.no. Oppgaven skal dere kunne finne i repositoriet med den følgende
 urien:
@@ -151,7 +151,7 @@ I `inf101.simulator.objects.examples` finner du noen eksempler på objekter til 
 
 * Du kan endre navn på SimAnimal, og f.eks. flytte den ut av `examples` om du vil. Informer om det i oversiktsdokumentet, og
 bruk Eclipse/IntelliJ sine refaktoreringsverktøy til å flytte/bytte navn, slik at de tilhørende testene blir oppdatert med nytt navn (høyreklikk → Refactor → Rename / Move)
-* *VIKTIG:* Det er veldig grei om du ikke legger til mer oppførsel til SimAnimal enn at den passer med det som er beskrevet her, og med de tilhørende testene i `inf101.tests.SimAnimal*`.
+* *VIKTIG:* Det er veldig greit om du ikke legger til mer oppførsel til SimAnimal enn at den passer med det som er beskrevet her, og med de tilhørende testene i `inf101.tests.SimAnimal*`.
 Det vil lette rettearbeidet. Når du senere skal lage mer fancy ting, kan du lage en ny (kopiert) klasse og la SimAnimal være i fred.
 * Det følger med noen få tester til denne delen av oppgaven. Du kan bruke de som basis for videre testing senere. Det er mulig du må gjøre små endringer for å tilpasse dem (justere
 noen av tallene, f.eks.) – men pass på at du ikke bare tilpasser testene til feil kode!
@@ -360,7 +360,7 @@ Spørsmål:
 Utover de konkrete oppgavene i Del I står du fritt til å lage hva du vil. Neste steg i oppgaven er å avgjøre hva du skal gjøre. Tenk litt først, tegn på papir osv – til slutt
 skal designet ditt *skrives ned i oversiktsdokumentet* (men det kan være greit å gjøre det parallelt med Del III).
 
--   Avgjør omtrentlig hva slags type dyr og planter (*ting*) som skal være med i systemet. Man kan for eksempel har fugleflokker som flyr rundt og spiser planter; en skog med kaniner, rever og masse salat; et akvarie med fisk; osv.
+-   Avgjør omtrentlig hva slags type dyr og planter (/ting) som skal være med i systemet. Man kan for eksempel ha fugleflokker som flyr rundt og spiser planter; en skog med kaniner, rever og masse salat; et akvarie med fisk; osv.
 
 -   Finn fram til oppførselen til de forskjellige tingene. F.eks:
 
@@ -438,7 +438,7 @@ Implementer designet ditt – evt. gå frem og tilbake mellom å designe og impl
 
 -   *tips:* For litt mer avansert testing, lag en generator for objekter av klassene du har laget, slik at du kan få tilfeldig data. Lag også en generator for ISimObject og IMovingObject, som velger tilfeldig mellom de andre generatorene du lager.
 
-*Du kan endre på all den utleverte koden om du vil – men vi vil helst at du har en fungerene implementasjon av tingene fra Del I (selv om de kanskje ikke er i bruk).
+*Du kan endre på all den utleverte koden om du vil – men vi vil helst at du har en fungerene implementasjon av tingene fra Del I (selv om de kanskje ikke er i bruk).*
 
 
 ### Tester
@@ -446,7 +446,7 @@ Implementer designet ditt – evt. gå frem og tilbake mellom å designe og impl
 Lag tester – du kan prøve å teste forskjellige scenarier på samme måte som de medfølgende testene.
 
 
-3## Tips
+## Tips
 
 * Det er smart å begynne enklest mulig, og gradvis legge til mer funksjonalitet.
 
@@ -457,7 +457,7 @@ Lag tester – du kan prøve å teste forskjellige scenarier på samme måte som
 
 Du vil treffe på flere tilfeller hvor det er nødvendig å sjekke om objekter er av / arver fra forskjellige klasser.
 
-Antakelig kjenner du allerede til <span>`instanceof`</span> fra [Semsteroppgave 1](sem-1):
+Antakelig kjenner du allerede til <span>`instanceof`</span> fra [Semsteroppgave 1](https://retting.ii.uib.no/inf101/inf101v17/wikis/sem-1):
 
       if(t instanceof IEdible)
         ...
