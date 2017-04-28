@@ -33,6 +33,7 @@ public class SimAnimal extends AbstractMovingObject {
 
 	public IEdibleObject getClosestFood() {
 		for (ISimObject obj : habitat.nearbyObjects(this, getRadius()+400)) {
+			
 			if(obj instanceof IEdibleObject)
 				return (IEdibleObject) obj;
 		}
@@ -62,8 +63,22 @@ public class SimAnimal extends AbstractMovingObject {
 				// we're actually outside
 				accelerateTo(5 * defaultSpeed, 0.3);
 			}
-		}
+		} 
+		
+	for (ISimObject obj : habitat.nearbyObjects(this, getRadius()+400)) {
+			Direction dir1 = this.directionTo(obj);
+			Direction dir2 = obj.getDirection();
+			
+			if(obj instanceof IEdibleObject && (Math.abs(dir1)-dir2)<90){
+				accelerateTo(defaultSpeed, 100);
+				dir = dir.turnTowards(directionTo(obj), 2);
+				if(distanceTo(obj)<2){
+					((IEdibleObject) obj).eat(10);
+					
+				}
+			}
 
+	}
 
 		accelerateTo(defaultSpeed, 0.1);
 
