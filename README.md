@@ -215,7 +215,7 @@ Kjør programmet innimellom, og se at det ser fornuftig ut:
 * Maten blir spist og forsvinner
 
 *Litt mer avansert:* Du kan også prøve å implementere at simdyret har en form for synsvinkel – at den bare "ser" ting som er i retningen den peker, innenfor en viss vinkel
-(f.eks. noe slikt som `Math.abs(minRetning - retningTilMat) < 90`). Hvis du gjør dette bør også `cantSeeFoodTest` virke – ellers vil den feile.
+(se *Tips 2* for mer om slike vinkelutregninger). Hvis du gjør dette bør også `cantSeeFoodTest` virke – ellers vil den feile.
 
 ## 1.3: Unnvike farer
 Alle vet at simulerte dyr kan bli til en plage innimellom – derfor har vi også laget SimRepellant™ (dette er de røde objektene på skjermen). Du skal nå implementere at SimAnimal
@@ -503,3 +503,16 @@ Man kan selvfølgelig også sjekke mot ting lenger oppe i arvehierarkiet hvis ma
 
 * Det er helt OK om de konkrete klassene dine er relativt enkle.  Husk den generelle INF101-regelen: hvis noe er veldig komplisert, eller hvis du har mye kode i én metode eller én klasse, så har du antakelig gjort noe feil: *“A designer knows he has achieved perfection not when there is nothing left to add, but when there is nothing left to take away.” —[Antoine de Saint-Exupery](https://en.wikipedia.org/wiki/Antoine_de_Saint-Exup%C3%A9ry)* (Ikke se på de utleverte `Habitat` og `SimMain` som eksempler her...)
 
+## Tips 2: Vinkelutregninger
+
+Det kan av og til være nyttig å finne vinkelavstanden mellom to retninger, f.eks. om du vil se om noe er innenfor synsvinkelen, eller om noe er plassert bak noe annet.
+Vinkelutregninger er litt mer komplisert enn de først gjerne ser ut, siden de "wrapper" rundt, slik at 0°=360° og 180°=-180° osv. Å bare gjøre *a - b* hjelper ikke nødvendigvis (fungerer
+fint for f.eks. *2° - -2° = 4°*, men ikke for *178° - -178° = 356°* (burde være *-4°*). Hvis vinkelavstanden er mer enn 180 må du justere med å trekke fra eller legge til 360.
+Se f.eks. hvordan vi har gjort det i `Direction.turnTowards()` (burde funke å justere før eller etter subtraksjonen). (Se forøvrig [Stack Overflow](http://stackoverflow.com/questions/16180595/find-the-angle-between-two-bearings).)
+
+Det kan lønne seg å lage en egen `Direction.diff()`-metode som implementerer dette.
+
+Et relatert spørsmål er hvordan man finner gjennomsnittet av et sett med retninger (kan være nyttig om man vil ha en flokk til å bevege seg i samme retning. Samme problem oppstår her. 
+Den letteste løsningen er å finne sinus og cosinus til alle vinklene (dvs. konvertere til enhetsvektorer), regne ut snittet av disse og konvertere tilbake til vinkel. Du finner
+trigonometriske funksjoner i `Math`-klassen – alle disse tar radianer og ikke grader, så du må konvertere vinklene dine (hjelper kanskje å legge til en metode `toRadians()` i `Direction`
+– vinkelen i radianer er allerede lagret som en feltvariabel). (Se forøvrig [Stack Overflow](http://stackoverflow.com/questions/491738/how-do-you-calculate-the-average-of-a-set-of-circular-data))
