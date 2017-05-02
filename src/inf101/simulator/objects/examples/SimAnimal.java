@@ -55,7 +55,7 @@ public class SimAnimal extends AbstractMovingObject {
 	@Override
 	public double getHeight() {
 		return 50;
-	}
+	} 
 
 	@Override
 	public double getWidth() {
