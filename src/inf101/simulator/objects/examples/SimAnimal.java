@@ -1,4 +1,5 @@
 package inf101.simulator.objects.examples;
+
 import inf101.simulator.Direction;
 import inf101.simulator.GraphicsHelper;
 import inf101.simulator.Habitat;
@@ -24,25 +25,17 @@ public class SimAnimal extends AbstractMovingObject {
 
 	@Override
 	public void draw(GraphicsContext context) {
-		super.draw(context);
+
+		double direction = getDirection().toAngle();
+
+		if (direction < 90 && direction > -90) {
+			context.translate(0, this.getHeight());
+			context.scale(1.0, -1.0);
+		}
+
 		context.drawImage(MediaHelper.getImage("images/pusheen.png"), 0, 0, getWidth(), getHeight());
-		//double direction = getDirection().toAngle();
-		
-		
-	//	if(direction > -90 && direction <90){
-			
-		//	context.translate(getX(), getY());
-			//context.rotate(direction);
-			//context.scale(1.0, -1.0);
-		//}
-	
-	
-		
-		
-		
-		
-		
-		
+		super.draw(context);
+
 	}
 
 	public IEdibleObject getBestFood() {
@@ -50,12 +43,12 @@ public class SimAnimal extends AbstractMovingObject {
 	}
 
 	public IEdibleObject getClosestFood() {
-		for (ISimObject obj : habitat.nearbyObjects(this, getRadius()+400)) {
-			
-			if(obj instanceof IEdibleObject)
+		for (ISimObject obj : habitat.nearbyObjects(this, getRadius() + 400)) {
+
+			if (obj instanceof IEdibleObject)
 				return (IEdibleObject) obj;
 		}
-		
+
 		return null;
 	}
 
@@ -68,7 +61,7 @@ public class SimAnimal extends AbstractMovingObject {
 	public double getWidth() {
 		return 50;
 	}
-	
+
 	@Override
 	public void step() {
 		// by default, move slightly towards center
@@ -77,40 +70,34 @@ public class SimAnimal extends AbstractMovingObject {
 		// go towards center if we're close to the border
 		if (!habitat.contains(getPosition(), getRadius() * 1.2)) {
 			dir = dir.turnTowards(directionTo(habitat.getCenter()), 5);
-			if (!habitat.contains(getPosition(), getRadius())) { 
+			if (!habitat.contains(getPosition(), getRadius())) {
 				// we're actually outside
 				accelerateTo(5 * defaultSpeed, 0.3);
 			}
-		} 
-		
-	for (ISimObject obj : habitat.nearbyObjects(this, getRadius()+400)) {
+		}
+
+		for (ISimObject obj : habitat.nearbyObjects(this, getRadius() + 400)) {
 			Direction dir1 = this.directionTo(obj);
 			Direction dir2 = obj.getDirection();
-			
+
 			dir1.angleTo(dir2);
-						
-			if(obj instanceof IEdibleObject && (Math.abs(dir1.toAngle())-dir2.toAngle())<90){
+
+			if (obj instanceof IEdibleObject && (Math.abs(dir1.toAngle()) - dir2.toAngle()) < 90) {
 				dir = dir.turnTowards(directionTo(obj), 2);
-				if(distanceTo(obj)<2){
+				if (distanceTo(obj) < 2) {
 					((IEdibleObject) obj).eat(10);
-					
-				}
-			}
-			else if(obj instanceof SimRepellant && Math.abs(dir1.toAngle())-dir2.toAngle()<90){
-			
-				if(distanceTo(obj)<20){
-					dir = dir.turnTowards(dir.turnBack(), 20);
-					accelerateTo(defaultSpeed, 0.3);	
 
 				}
-				
+			} else if (obj instanceof SimRepellant && (Math.abs(dir1.toAngle() - dir2.toAngle()) < 120)) {
+				if (distanceTo(obj) < 100) {
+					Direction opposite = dir.turnTowards(directionTo(obj), 10).turnBack();
+					dir = dir.turnTowards(opposite, 10);
+				}
+
 			}
 
-	}
-	
-	
-	
-		
+		}
+
 		accelerateTo(defaultSpeed, 0.1);
 
 		super.step();
