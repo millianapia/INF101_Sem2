@@ -36,24 +36,6 @@ public class SimAnimal extends AbstractMovingObject {
 		context.drawImage(MediaHelper.getImage("images/pusheen.png"), 0, 0, getWidth(), getHeight());
 		super.draw(context);
 
-		context.drawImage(MediaHelper.getImage("images/pusheen.png"), 0, 0, getWidth(), getHeight());
-		//double direction = getDirection().toAngle();
-		
-		
-	//	if(direction > -90 && direction <90){
-			
-		//	context.translate(getX(), getY());
-			//context.rotate(direction);
-			//context.scale(1.0, -1.0);
-		//}
-	
-	
-		
-		
-		
-		
-		
-		
 	}
 
 	public IEdibleObject getBestFood() {
@@ -73,7 +55,7 @@ public class SimAnimal extends AbstractMovingObject {
 	@Override
 	public double getHeight() {
 		return 50;
-	} 
+	}
 
 	@Override
 	public double getWidth() {
@@ -101,8 +83,6 @@ public class SimAnimal extends AbstractMovingObject {
 			dir1.angleTo(dir2);
 
 			if (obj instanceof IEdibleObject && (Math.abs(dir1.toAngle()) - dir2.toAngle()) < 90) {
-						
-			if(obj instanceof IEdibleObject && (Math.abs(dir1.toAngle())-dir2.toAngle())<90){
 				dir = dir.turnTowards(directionTo(obj), 2);
 				if (distanceTo(obj) < 2) {
 					((IEdibleObject) obj).eat(10);
@@ -115,21 +95,9 @@ public class SimAnimal extends AbstractMovingObject {
 				}
 
 			}
-			else if(obj instanceof SimRepellant && Math.abs(dir1.toAngle())-dir2.toAngle()<90){
-			
-				if(distanceTo(obj)<20){
-					dir = dir.turnTowards(dir.turnBack(), 20);
-					accelerateTo(defaultSpeed, 0.3);	
-
-				}
-				
-			}
 
 		}
-	
-	
-	
-		
+
 		accelerateTo(defaultSpeed, 0.1);
 
 		super.step();
