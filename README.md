@@ -171,7 +171,7 @@ til `drawImage`.
 
 * Generelt er koordinatsystemet innrettet slik at (0,0) er *nederste venstre hjørne*. Økende Y-verdi er oppover på skjermen, økende X-verdi er mot høyre på skjermen. Retninger
 fungerer slik at 0° er er høyre, 90° er opp, 180° er venstre og -90°/270° er ned. Alle vinkler du får fra Direction-klassen er normalisert til å være mellom –180° og 180° og er oppgitt
-i grader, ikke radianer. Fordi JavaFX vanligvis regner med (0,0) i øverste høyre hjørne, blir bildene tegner opp-ned. Det gjør egentlig ingenting, fordi de ville blitt opp-ned uansett
+i grader, ikke radianer. Fordi JavaFX vanligvis regner med (0,0) i øverste venstre hjørne, blir bildene tegner opp-ned. Det gjør egentlig ingenting, fordi de ville blitt opp-ned uansett
 etterhvert som objektene endrer retning. Du kan eventuelt fikse dette ved å justere Y-posisjon og oppgi en negativ høyde, eller se litt lenger nede.
 
 * Husk å fortsatt kalle `super.draw()` i draw-metoden din; her kan det tegnes på en del nyttig informasjon om størrelse, retning, fart osv.
