@@ -165,7 +165,7 @@ gang du skal tegne bildet), det vil uansett bare laste inn bildet første gangen
 dem i `inf101.simulator.images`. Det ligger noen bilder der fra før som du kan bruke om du vil.
 
 * Oppdater `draw`-metoden til SimAnimal, slik at den tegner et bilde. Bruk `context.drawImage()`. Når `draw()`-metoden kalles er koordinatsystemet satt opp slik at (0,0)
-er *nederste høyre hjørnet på objektet som skal tegnes*. Koordinatsystemet er også rotert (rundt sentrum av objektet) i tråd med retningen til objektet (`getDirection()`). Så
+er *nederste venstre hjørnet på objektet som skal tegnes*. Koordinatsystemet er også rotert (rundt sentrum av objektet) i tråd med retningen til objektet (`getDirection()`). Så
 lenge bildet ditt peker mot / har ansiktet mot høyre, bør det se riktig ut. Dvs. at du antakelig får bra resultat om du oppgir 0, 0, getWidth(), getHeight() som x, y, bredde og høyde
 til `drawImage`.
 
