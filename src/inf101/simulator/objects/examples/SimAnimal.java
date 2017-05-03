@@ -9,6 +9,7 @@ import inf101.simulator.SimMain;
 import inf101.simulator.objects.AbstractMovingObject;
 import inf101.simulator.objects.IEdibleObject;
 import inf101.simulator.objects.ISimObject;
+import inf101.simulator.objects.ISimObjectFactory;
 import inf101.simulator.objects.SimEvent;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
@@ -102,4 +103,12 @@ public class SimAnimal extends AbstractMovingObject {
 
 		super.step();
 	}
+	
+	
+
+	ISimObjectFactory myFactory = new ISimObjectFactory() {
+		public ISimObject create(Position pos, Habitat hab) {
+			return null;
+		}
+	};
 }
