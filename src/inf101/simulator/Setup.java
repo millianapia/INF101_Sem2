@@ -18,9 +18,8 @@ public class Setup {
 		SimMain.registerSimObjectFactory((Position pos, Habitat hab) -> new SimFeed(pos, main.getRandom().nextDouble()*2+0.5), "SimFeed™", SimFeed.PAINTER);
 		SimMain.registerSimObjectFactory((Position pos, Habitat hab) -> new SimRepellant(pos), "SimRepellant™",
 				SimRepellant.PAINTER);
-		SimMain.registerSimObjectFactory((Position pos, Habitat hab) -> new SimAnimal(pos, hab), "SimAnimal",
-				SimRepellant.PAINTER);	}
-
+		SimMain.registerSimObjectFactory((Position pos, Habitat hab) -> new SimAnimal(pos, hab), "SimAnimal", "pusheen.png");
+	}
 	/**
 	 * This method is called for each step, you can use it to add objects at
 	 * random intervals
