@@ -97,7 +97,7 @@ public class SimAnimal extends AbstractMovingObject {
 			Direction dir1 = this.directionTo(obj);
 			Direction dir2 = obj.getDirection();
 
-			dir1.angleTo(dir2);
+			//dir1.angleTo(dir2);
 
 			if (obj instanceof IEdibleObject && (Math.abs(dir1.toAngle()) - dir2.toAngle()) < 90) {
 				dir = dir.turnTowards(directionTo(obj), 2);
@@ -110,6 +110,10 @@ public class SimAnimal extends AbstractMovingObject {
 					Direction opposite = dir.turnTowards(directionTo(obj), 10).turnBack();
 					dir = dir.turnTowards(opposite, 10);
 				}
+
+			}
+			else{
+				dir = dir.turnTowards(directionTo(habitat.getCenter()), 0.5);
 
 			}
 

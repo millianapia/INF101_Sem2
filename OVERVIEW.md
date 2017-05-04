@@ -7,6 +7,20 @@ Student:
 
 ## Om funksjonaliteten
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Svar på spørsmål
 * Se på Position.move(). Hvordan virker den? Hvordan er den annerledes fra Position-klasse i Lab 5?
 
