@@ -7,6 +7,7 @@ import inf101.simulator.MediaHelper;
 import inf101.simulator.Position;
 import inf101.simulator.SimMain;
 import inf101.simulator.objects.AbstractMovingObject;
+import inf101.simulator.objects.CompareFood;
 import inf101.simulator.objects.IEdibleObject;
 import inf101.simulator.objects.ISimObject;
 import inf101.simulator.objects.ISimObjectFactory;
@@ -40,8 +41,23 @@ public class SimAnimal extends AbstractMovingObject {
 	}
 
 	public IEdibleObject getBestFood() {
-		return getClosestFood();
-	}
+        IEdibleObject first = null;
+         CompareFood compare = new CompareFood();
+    for (ISimObject obj : habitat.nearbyObjects(this, getRadius()+400)){
+        if(obj instanceof IEdibleObject){
+            if (first == null){
+                first = (IEdibleObject) obj;
+                continue;
+            }
+
+            if(compare.compare((IEdibleObject) obj, first) == 1){
+                first = (IEdibleObject) obj;
+            }
+        }
+    }
+
+    return first;
+    }
 
 	public IEdibleObject getClosestFood() {
 		for (ISimObject obj : habitat.nearbyObjects(this, getRadius() + 400)) {
