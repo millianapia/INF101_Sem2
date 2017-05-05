@@ -4,6 +4,7 @@ import inf101.simulator.objects.examples.Blob;
 import inf101.simulator.objects.examples.SimAnimal;
 import inf101.simulator.objects.examples.SimFeed;
 import inf101.simulator.objects.examples.SimRepellant;
+import inf101.simulator.objects.examples.SimSmallerAnimal;
 
 public class Setup {
 	/** This method is called when the simulation starts */
@@ -19,6 +20,8 @@ public class Setup {
 		SimMain.registerSimObjectFactory((Position pos, Habitat hab) -> new SimRepellant(pos), "SimRepellant™",
 				SimRepellant.PAINTER);
 		SimMain.registerSimObjectFactory((Position pos, Habitat hab) -> new SimAnimal(pos, hab), "SimAnimal", "pusheen.png");
+		SimMain.registerSimObjectFactory((Position pos, Habitat hab) -> new SimSmallerAnimal(pos, hab), "SimAnimal", "mouse.png");
+
 	}
 	/**
 	 * This method is called for each step, you can use it to add objects at
