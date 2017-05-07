@@ -1,22 +1,39 @@
 # Oversikt
 
-Student:
+<b>Student:</b>
+
 * Navn: Malin Wist Jakobsen
 * BrukerNavn: xun007
 * Epost: malin@j-j.no   / malin.jakobsen@student.uib.no
 
 ## Om funksjonaliteten
+<b>Oversikt over oppførsel over objektene:</b>
+
+- SimAnimal
 
 
+Har bildet som en gul fisk, den har alle implementasjonene fra del 1. Den ser på SimRepellant som en fare, og SimFeed som mat
+
+- SimFeed
 
 
+  Har bildet som sjøgress. 
+
+- SimRepellant
 
 
+Har bilde som en manet. 
+- simShark
 
 
+Har bildet som en hai, den spiser sjøgress og SimSmallerAnimal(røde fisken). Hvis den har fått mat over normalvekten så blir den sakte og roper "I'm fat". Hvis den er under halvparten a normalvekten så blir den ekstremt fort. Hvis den er under 1/10 av normalvekten så sier den "i'm dying" og så forsvinner den
+Den har en  
+- SimSmallerAnimal
 
 
+Har bildet som en rød fisk. Er redd for haien og SimRepellant og spiser sjøgress. Har samme logikk som haien når det gjelder vekt. Når den er for stor, for liten osv. Forskjellen er at den ikke leter etter beste mat. Den spiser alt som er rundt seg (i synsvinkelen).
 
+<b>Oversikt over klasser: </b>
 
 
 
@@ -48,7 +65,7 @@ I SimAnimal så bruker jeg turnTowards for å justere retningen min gradvis. Vi 
 
 * Vi har ingen public metoder for å endre på posisjon, retning, osv. Hadde det vært lurt å ha det? Hvorfor / hvorfor ikke?
 
-
+-------------------------------------------------------------------------------
 
 <i>1.7: Noen få ekstra spørsmål: 
 Felles for en del av tingene du har gjort her er:
