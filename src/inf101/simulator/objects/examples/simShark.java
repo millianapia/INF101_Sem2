@@ -21,7 +21,7 @@ public class simShark extends AbstractMovingObject implements ISimListener {
 	private static final double defaultSpeed = 1.0;
 	private Habitat habitat;
 	private double normalWeight = 100;
-	private double weight = 70;
+	private double weight = 90;
 
 	public simShark(Position pos, Habitat hab) {
 		super(new Direction(0), pos, defaultSpeed);
@@ -29,6 +29,7 @@ public class simShark extends AbstractMovingObject implements ISimListener {
 		hab.addListener(this, this);
 	}
 
+	//Gets picture from drawimage
 	@Override
 	public void draw(GraphicsContext context) {
 
@@ -45,24 +46,31 @@ public class simShark extends AbstractMovingObject implements ISimListener {
 		super.draw(context);
 
 	}
-
+ /* Method to check for best food. Gets class CompareFood to use later in code
+  * Gets an empty IEdibleObject. First there is a for-loop that checks all
+  * objects nearby in a radius of (getRadius() +400). If the object is an
+  * instance of IEdibleObject -> checks first if bestfood is empty, then it
+  * sets best food to the object it found in the loop. Then continues to
+  * the next if, which compares a new object and bestfood to see which
+  * is better. Then returns bestfood. 
+  * */
 	public IEdibleObject getBestFood() {
-		IEdibleObject first = null;
+		IEdibleObject bestFood = null;
 		CompareFood compare = new CompareFood();
 		for (ISimObject obj : habitat.nearbyObjects(this, getRadius() + 400)) {
 			if (obj instanceof IEdibleObject) {
-				if (first == null) {
-					first = (IEdibleObject) obj;
+				if (bestFood == null) {
+					bestFood = (IEdibleObject) obj;
 					continue;
 				}
 
-				if (compare.compare((IEdibleObject) obj, first) == 1) {
-					first = (IEdibleObject) obj;
+				if (compare.compare((IEdibleObject) obj, bestFood) == 1) {
+					bestFood = (IEdibleObject) obj;
 				}
 			}
 		}
 
-		return first;
+		return bestFood;
 	}
 
 	public IEdibleObject getClosestFood() {
@@ -87,13 +95,18 @@ public class simShark extends AbstractMovingObject implements ISimListener {
 
 	@Override
 	public void step() {
-
+/*This first part checks the weight of the shark
+ *  it goes down with each step, if the weight is
+ *  under 40 it is speed up and tells us that the
+ *  shark is hungry. If it is under 10 it says it is
+ *  dying and dies. Or if the weight is over the normal
+ *  it says it is fat and becomes slower */
 		if (normalWeight > weight) {
 			weight -= 0.005;
 		} else if (weight < 40) {
 			accelerateTo(2 * defaultSpeed, 2);
-			SimEvent death = new SimEvent(this, "I'm hungry", null, null);
-			habitat.triggerEvent(death);
+			SimEvent hungry = new SimEvent(this, "I'm hungry", null, null);
+			habitat.triggerEvent(hungry);
 		} else if (weight < 10) {
 			super.destroy();
 			SimEvent death = new SimEvent(this, "I'm dying", null, null);
@@ -116,6 +129,8 @@ public class simShark extends AbstractMovingObject implements ISimListener {
 			}
 		}
 
+		/*Checks objects in a nearby radius.  There are ifs that 
+		 * checks which object obj is. */
 		for (ISimObject obj : habitat.nearbyObjects(this, getRadius() + 400)) {
 			Direction dir1 = this.directionTo(obj);
 			Direction dir2 = obj.getDirection();

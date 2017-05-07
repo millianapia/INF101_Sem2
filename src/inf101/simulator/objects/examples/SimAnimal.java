@@ -45,7 +45,14 @@ public class SimAnimal extends AbstractMovingObject implements ISimListener {
 		super.draw(context);
 
 	}
-
+	 /* Method to check for best food. Gets class CompareFood to use later in code
+	  * Gets an empty IEdibleObject. First there is a for-loop that checks all
+	  * objects nearby in a radius of (getRadius() +400). If the object is an
+	  * instance of IEdibleObject -> checks first if bestfood is empty, then it
+	  * sets best food to the object it found in the loop. Then continues to
+	  * the next if, which compares a new object and bestfood to see which
+	  * is better. Then returns bestfood. 
+	  * */
 	public IEdibleObject getBestFood() {
 		IEdibleObject first = null;
 		CompareFood compare = new CompareFood();
@@ -102,7 +109,8 @@ public class SimAnimal extends AbstractMovingObject implements ISimListener {
 				accelerateTo(5 * defaultSpeed, 0.3);
 			}
 		}
-
+		/*Checks objects in a nearby radius.  There are ifs that 
+		 * checks which object obj is. */
 		for (ISimObject obj : habitat.nearbyObjects(this, getRadius() + 400)) {
 			Direction dir1 = this.directionTo(obj);
 			Direction dir2 = obj.getDirection();

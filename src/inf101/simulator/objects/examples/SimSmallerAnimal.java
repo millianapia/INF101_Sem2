@@ -73,7 +73,12 @@ public class SimSmallerAnimal extends AbstractMovingObject implements ISimListen
 
 	@Override
 	public void step() {
-
+		/*This first part checks the weight of the shark
+		 *  it goes down with each step, if the weight is
+		 *  under 40 it is speed up and tells us that the
+		 *  shark is hungry. If it is under 10 it says it is
+		 *  dying and dies. Or if the weight is over the normal
+		 *  it says it is fat and becomes slower */
 		if (normalWeight > weight) {
 			weight -= 0.005;
 		} else if (weight < 40) {
@@ -101,7 +106,8 @@ public class SimSmallerAnimal extends AbstractMovingObject implements ISimListen
 				accelerateTo(5 * defaultSpeed, 0.3);
 			}
 		}
-
+		/*Checks objects in a nearby radius.  There are ifs that 
+		 * checks which object obj is. */
 		for (ISimObject obj : habitat.nearbyObjects(this, getRadius() + 400)) {
 			Direction dir1 = this.directionTo(obj);
 			Direction dir2 = obj.getDirection();
