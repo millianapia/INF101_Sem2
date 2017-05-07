@@ -77,4 +77,6 @@ oppsummering om slutten av simulatoren.l
 
 * Rammeverkkode: © Anya Helene Bagge (basert på tidligere utgaver, laget av Anya Helene Bagge, Anneli Weiss og andre).
 
-* pipp.png, bakgrunn.png © Anya Helene Bagge, This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License
+* underwater.png. https://opengameart.org/content/fish-pack This work is licensed under CC BY 3.0
+
+* seaweed.png, redfish.png, shark.png, yellowfish.png, jellyfish.png https://opengameart.org/content/fish-pack This work is licensed under Public domain

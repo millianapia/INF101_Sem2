@@ -39,7 +39,7 @@ public class SimAnimal extends AbstractMovingObject implements ISimListener {
 			context.scale(1.0, -1.0);
 		}
 
-		context.drawImage(MediaHelper.getImage("images/pusheen.png"), 0, 0, getWidth(), getHeight());
+		context.drawImage(MediaHelper.getImage("images/yellowfish.png"), 0, 0, getWidth(), getHeight());
 		super.drawBar(context, weight, 0, Color.RED, Color.AQUA);
 
 		super.draw(context);
@@ -90,20 +90,7 @@ public class SimAnimal extends AbstractMovingObject implements ISimListener {
 
 		if (normalWeight > weight) {
 			weight -= 0.005;
-		} else if (weight < 40) {
-			accelerateTo(2 * defaultSpeed, 2);
-			SimEvent death = new SimEvent(this, "I'm hungry", null, null);
-			habitat.triggerEvent(death);
-		} else if (weight < 10) {
-			super.destroy();
-			SimEvent death = new SimEvent(this, "I'm dying", null, null);
-			habitat.triggerEvent(death);
-		} else if (weight > normalWeight) {
-
-			SimEvent fat = new SimEvent(this, "I'm fat", null, null);
-			habitat.triggerEvent(fat);
-			accelerateTo(0.2, 0.1);
-		}
+		} 
 		// by default, move slightly towards center
 		dir = dir.turnTowards(directionTo(habitat.getCenter()), 0.5);
 
@@ -135,11 +122,7 @@ public class SimAnimal extends AbstractMovingObject implements ISimListener {
 				dir = dir.turnTowards(turnBack, 2);
 
 			}
-			else if(obj instanceof SimSmallerAnimal){
-				dir = dir.turnTowards(directionTo(obj), 2);
-				if(distanceTo(obj)<3)
-				obj.destroy();
-			}
+
 
 		}
 

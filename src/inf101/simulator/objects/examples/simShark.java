@@ -17,13 +17,13 @@ import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class SimSmallerAnimal extends AbstractMovingObject implements ISimListener, IEdibleObject {
+public class simShark extends AbstractMovingObject implements ISimListener {
 	private static final double defaultSpeed = 1.0;
 	private Habitat habitat;
 	private double normalWeight = 100;
 	private double weight = 70;
 
-	public SimSmallerAnimal(Position pos, Habitat hab) {
+	public simShark(Position pos, Habitat hab) {
 		super(new Direction(0), pos, defaultSpeed);
 		this.habitat = hab;
 		hab.addListener(this, this);
@@ -39,7 +39,7 @@ public class SimSmallerAnimal extends AbstractMovingObject implements ISimListen
 			context.scale(1.0, -1.0);
 		}
 
-		context.drawImage(MediaHelper.getImage("images/redfish.png"), 0, 0, getWidth(), getHeight());
+		context.drawImage(MediaHelper.getImage("images/shark.png"), 0, 0, getWidth(), getHeight());
 		super.drawBar(context, weight, 0, Color.RED, Color.AQUA);
 
 		super.draw(context);
@@ -47,8 +47,22 @@ public class SimSmallerAnimal extends AbstractMovingObject implements ISimListen
 	}
 
 	public IEdibleObject getBestFood() {
-		return null;
+		IEdibleObject first = null;
+		CompareFood compare = new CompareFood();
+		for (ISimObject obj : habitat.nearbyObjects(this, getRadius() + 400)) {
+			if (obj instanceof IEdibleObject) {
+				if (first == null) {
+					first = (IEdibleObject) obj;
+					continue;
+				}
 
+				if (compare.compare((IEdibleObject) obj, first) == 1) {
+					first = (IEdibleObject) obj;
+				}
+			}
+		}
+
+		return first;
 	}
 
 	public IEdibleObject getClosestFood() {
@@ -115,11 +129,16 @@ public class SimSmallerAnimal extends AbstractMovingObject implements ISimListen
 					weight += 4;
 
 				}
-			} else if ((obj instanceof SimRepellant && (Math.abs(dir1.toAngle() - dir2.toAngle()) < 120)) || obj instanceof simShark ) {
+			} else if (obj instanceof SimRepellant && (Math.abs(dir1.toAngle() - dir2.toAngle()) < 120)) {
 
 				Direction turnBack = dir1.turnTowards(directionTo(obj), 10).turnBack();
 				dir = dir.turnTowards(turnBack, 2);
 
+			}
+			else if(obj instanceof SimSmallerAnimal){
+				dir = dir.turnTowards(directionTo(obj), 2);
+				if(distanceTo(obj)<3)
+				obj.destroy();
 			}
 
 		}
@@ -138,17 +157,5 @@ public class SimSmallerAnimal extends AbstractMovingObject implements ISimListen
 	@Override
 	public void eventHappened(SimEvent event) {
 		super.say(event.getType());
-	}
-
-	@Override
-	public double eat(double howMuch) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public double getNutritionalValue() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 }
