@@ -516,3 +516,28 @@ Et relatert spørsmål er hvordan man finner gjennomsnittet av et sett med retni
 Den letteste løsningen er å finne sinus og cosinus til alle vinklene (dvs. konvertere til enhetsvektorer), regne ut snittet av disse og konvertere tilbake til vinkel. Du finner
 trigonometriske funksjoner i `Math`-klassen – alle disse tar radianer og ikke grader, så du må konvertere vinklene dine (hjelper kanskje å legge til en metode `toRadians()` i `Direction`
 – vinkelen i radianer er allerede lagret som en feltvariabel). (Se forøvrig [Stack Overflow](http://stackoverflow.com/questions/491738/how-do-you-calculate-the-average-of-a-set-of-circular-data))
+
+## Tips 3: Events og listeners
+Listener-systemet er satt opp slik at objektet som trigger en hendelse ikke selv får beskjed om den. Dvs. at du må ha flere objekter på skjermen for å få noen effekt.
+
+* Kall addListener bare i konstruktøren – ellers blir lytteren lagt til tusenvis av ganger og systemet vil kjøre tregt
+* Så lenge din SimAnimal implements ISimListener, så bruker du den som lytte-objektet. Dvs. `addListener(this, this)` – det er en helt fornuftig måte å gjøre det på
+* Når du skal trigge en event, så trenger du et event-objekt. Det er noe som forteller om hendelsen som har skjedd. Du sender dette til triggerEvent(). Habitatet vil så sørge for å spre informasjonen til alle interesserte lyttere; dvs. den kaller alle eventHappened()-metodenen med event-objektet du laget
+* SimEvent-objektet skal ha informasjon om, hvilket sim-objekt som trigget eventen (this) + en eller annen melding / type, + evt valgfri ekstra informasjon
+* Habitatet vil sørge for å ikke sende eventen tilbake til samme objektet som trigget den, selv om den lytter. så det blir det f.eks. litt som at når en av de spiser, så roper den "her er det mat", og så "hører" de andre hva som skjer, og får et objekt med mer informasjon
+* Liknende teknikk er brukt i Habitat og SimMain for å lytte på mus- og tastetrykk
+
+
+
+## FAQ
+
+#### Klassehierarki
+Q: Hei, i hvilken grad bør/må man lage sitt eget klassehierarki?Har feks. tenkt til å lage en SimFox extends AbstractMovingObject. Er det godt nok å gjøre slik, eller bød/må man lage sine egne interfaces og superklasser? 🙂
+
+A: Du kan velge litt selv; benytt deg ihvertfall av de abstrkte klassene som er der; og så kan du vurdere å lage nye om du ser at du har oppførsel som går igjen i flere av klassene dine
+
+#### Hvordan bruke Comparator til å finne beste mat
+
+A: Du kan bruke komparatoren til å gjøre Collections.sort, men det går også an å finne den beste i en liste uten å sortere listen
+(hold rede på "beste" element (enten null eller første element til å begynne med), sammenlikn med hvert element i for-løkken, og oppdater hvis du finner noe som er bedre)
+
