@@ -527,7 +527,32 @@ Listener-systemet er satt opp slik at objektet som trigger en hendelse ikke selv
 * Habitatet vil sørge for å ikke sende eventen tilbake til samme objektet som trigget den, selv om den lytter. så det blir det f.eks. litt som at når en av de spiser, så roper den "her er det mat", og så "hører" de andre hva som skjer, og får et objekt med mer informasjon
 * Liknende teknikk er brukt i Habitat og SimMain for å lytte på mus- og tastetrykk
 
+## Tips 4: Ekstra canvas til å tegne på
 
+`SimMain` er satt opp med flere lagvise områder som det går an å tegne på. `Habitat` bruker "main canvas" til å tegne sim-objektene, men du kan også på egenhånd hente ut og tegne på de andre ("top", "bottom" og "background").
+
+Du finner riktig graphics context til å tegne på slik:
+```
+Canvas bottom = SimMain.getInstance().getBottomCanvas();
+GraphicsContext bottomContext = bottom.getGraphicsContext2D();
+```
+
+Programmet dere har fått utlevert bruker ikke top og bottom i det hele tatt. Dvs. at hvis du skal ha ting til å bevege seg der, må du selv legge inn i en eller annen `draw`-metode at tegneområdet blir blanket ut og at alt tegnes på nytt:
+```
+bottomContext.clearRect(0, 0, habitat.getWidth(), habitat.getHeight());
+drawMoreStuff(bottomContext);
+```
+Hvis du ikke blanker ut tegneområdet blir nye ting tegnet over gamle ting. Du kan også risikere at det blir seende litt rart ut hvis brukeren endrer størrelsen på vinduet.
+
+En ting du f.eks. kan bruke dette til, er å lage fotspor. Du kan få gamle fotspor til å blekne vekk ved å legge på "effects":
+```
+bottomContext.applyEffect(new ColorAdjust(0.0, -0.05, -0.05, 0.0));
+```
+eller ved å tegne over med nesten helt gjennomsiktig svart:
+```
+bottomContext.setFill(Color.BLACK.deriveColor(0.0, 1.0, 1.0, 1.0 / 256.0));
+bottomContext.fillRect(0, 0, habitat.getWidth(), habitat.getHeight());
+```
 
 ## FAQ
 
