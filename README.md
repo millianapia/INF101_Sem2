@@ -566,3 +566,13 @@ A: Du kan velge litt selv; benytt deg ihvertfall av de abstrkte klassene som er 
 A: Du kan bruke komparatoren til å gjøre Collections.sort, men det går også an å finne den beste i en liste uten å sortere listen
 (hold rede på "beste" element (enten null eller første element til å begynne med), sammenlikn med hvert element i for-løkken, og oppdater hvis du finner noe som er bedre)
 
+#### ConcurrentModificationException
+
+Q: når et objekt "dør" vil jeg legge til et nytt "dødt" objekt på denne possisjonen men når jeg bruker habitat.add() krasjer bare programmet. må habitat.add() brukes på et spesielt sted ?
+
+A: Du får ikke lov å gjøre endringer på objects-listen mens for-løkken kjører (dvs. inni step-metodene til objektene) – da får du ConcurrentModificationException. Av en eller annen grunn hadde jeg tenkt på det med fjerning av objekter (derav destroy()/exists()) men ikke når man skal legge til nye
+
+* Løsning: i Habitat.step(), bytt ut "for (ISimObject obj : objects) {" med "for (ISimObject obj : new ArrayList<>(objects)) {" – eller la add()-metoden legge til nye objekter i en kø, som så blir overført til objects etter at for-løkken er ferdig.
+* 
+
+
