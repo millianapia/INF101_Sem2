@@ -18,7 +18,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class SimSmallerAnimal extends AbstractMovingObject implements ISimListener, IEdibleObject {
-	private static final double defaultSpeed = 1.0;
+	private static final double defaultSpeed = 1.2;
 	private Habitat habitat;
 	private double normalWeight = 100;
 	private double weight = 70;
@@ -115,8 +115,8 @@ public class SimSmallerAnimal extends AbstractMovingObject implements ISimListen
 			if (obj instanceof IEdibleObject && (Math.abs(dir1.toAngle()) - dir2.toAngle()) < 90) {
 				dir = dir.turnTowards(directionTo(obj), 2);
 				if (distanceTo(obj) < 3) {
-					SimEvent eat = new SimEvent(this, "nom", null, null);
-					habitat.triggerEvent(eat);
+					SimEvent eat1 = new SimEvent(this, "nom", null, null);
+					habitat.triggerEvent(eat1);
 					((IEdibleObject) obj).eat(10);
 					weight += 4;
 
@@ -141,9 +141,11 @@ public class SimSmallerAnimal extends AbstractMovingObject implements ISimListen
 		}
 	};
 
+	
+	
 	@Override
 	public void eventHappened(SimEvent event) {
-		super.say(event.getType());
+		this.say(event.getType());
 	}
 
 	@Override
@@ -157,4 +159,7 @@ public class SimSmallerAnimal extends AbstractMovingObject implements ISimListen
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	
+
 }

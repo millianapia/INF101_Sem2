@@ -97,6 +97,10 @@ public class SimAnimal extends AbstractMovingObject implements ISimListener {
 
 		if (normalWeight > weight) {
 			weight -= 0.005;
+		}  else if (weight < 10) {
+			super.destroy();
+			SimEvent death = new SimEvent(this, "I'm dying", null, null);
+			habitat.triggerEvent(death);
 		} 
 		// by default, move slightly towards center
 		dir = dir.turnTowards(directionTo(habitat.getCenter()), 0.5);
@@ -118,8 +122,8 @@ public class SimAnimal extends AbstractMovingObject implements ISimListener {
 			if (obj instanceof IEdibleObject && (Math.abs(dir1.toAngle()) - dir2.toAngle()) < 90) {
 				dir = dir.turnTowards(directionTo(obj), 2);
 				if (distanceTo(obj) < 3) {
-					SimEvent eat = new SimEvent(this, "nom", null, null);
-					habitat.triggerEvent(eat);
+					SimEvent eatFood = new SimEvent(this, "nom", null, null);
+					habitat.triggerEvent(eatFood);
 					((IEdibleObject) obj).eat(10);
 					weight += 4;
 
@@ -147,6 +151,6 @@ public class SimAnimal extends AbstractMovingObject implements ISimListener {
 
 	@Override
 	public void eventHappened(SimEvent event) {
-		super.say(event.getType());
+		this.say(event.getType());
 	}
 }

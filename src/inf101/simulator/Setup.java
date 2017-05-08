@@ -12,7 +12,7 @@ public class Setup {
 	public static void setup(SimMain main, Habitat habitat) {
 		habitat.addObject(new SimAnimal(new Position(400, 400), habitat));
 
-		habitat.addObject(new Blob(new Direction(0), new Position(400, 400), 1));
+	//	habitat.addObject(new Blob(new Direction(0), new Position(400, 400), 1));
 
 		for (int i = 0; i < 3; i++)
 			habitat.addObject(new SimRepellant(main.randomPos()));

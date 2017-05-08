@@ -31,13 +31,35 @@ Den har en
 - SimSmallerAnimal
 
 
-Har bildet som en rød fisk. Er redd for haien og SimRepellant og spiser sjøgress. Har samme logikk som haien når det gjelder vekt. Når den er for stor, for liten osv. Forskjellen er at den ikke leter etter beste mat. Den spiser alt som er rundt seg (i synsvinkelen).
-
-<b>Oversikt over klasser: </b>
+Har bildet som en rød fisk. Er redd for haien og SimRepellant og spiser sjøgress. Har samme logikk som haien når det gjelder vekt. Når den er for stor, for liten osv. Forskjellen er at den ikke leter etter beste mat. Den spiser alt som er rundt seg (i synsvinkelen).  Den er litt fortere enn haien
 
 
+<b>Oversikt over oppførsel over klassene:</b>
+
+- SimAnimal:
+
+Klassen extender og AbstractMovingObject for dette er et objekt som skal bevege seg. Den implementerer også ISimListener for å kunne bruke lyttere. I draw metoden så sjekker jeg om bildet er rett vei i forhold til retningen til fisken. Den snur seg hvis den ser mot retningen mellom 90 og -90 grader. Jeg har gjort det litt annerledes i getBestFood metoden, der jeg heller sjekker to objekter opp mot hverandre. Istedet for å legge det i en liste.  På step metoden har jeg lagt til en if som senker vekten for hvert step og den dør hvis det er under så så  mye i vekt. Har og lagt til en for løkke som finner alle objektene i nærheten på en viss radius. Og har en if og en else if som sjekker om objektet er enten spiselig eller farlig. Da har de ulike oppgaver som de skal gjøres.
+Lagt til fabrikken og eventhappend metodene nederst. 
+
+- simShark:
+
+Samme som i begynnelsen av koden av SimAnimal, men er forskjellig i metoden step. Her har jeg lagt til flere muligheter når det gjelder vekten til haien. Den går ned hvert steg med 0.005 "kg" og hvis vekten er under 40 så skal den si at den er sulten og blir raskere. Hvis den er under 10 så skal den si den dør og så blir den ødelagt med super.destroy. Hvis vekten er over normalvekten så sier den at den er feit, og blir saktere. Har og lagt til i for løkken at hvis den finner et objekt av instansen SimSmallerAnimal så skal det "spise det". 
 
 
+- SimSmallerAnimal: 
+
+Mye samme som i simShark, eneste er at den løper fra haien som den løper fra SimRepellant. 
+
+
+<b>Ekstra kommentarer (feil, endringer): </b>
+
+Endret litt på testen på SimAnimalAvoidingTest, test nr 2 gikk alt for mange steps, så gjorde det mindre. La til en test som sjekket om SimSmallerAnimal unngikk simShark
+
+Endret også på getBestFood, hvor jeg ikke brukte collections, men heller bare sammenlignet to objekter og returnerte det beste. 
+
+La til bakgrunn i SimMain metoden og flippet bildet opp ned for å få det rett vei. 
+
+En ting som jeg hadde håpet på å fikse var at alle objektene sa det samme når noe skjedde
 ## Svar på spørsmål
 * Se på Position.move(). Hvordan virker den? Hvordan er den annerledes fra Position-klasse i Lab 5?
 
@@ -57,13 +79,25 @@ og står i ro i simulatoren.
 Hva gjør hjelpemetodene distanceTo og directionTo?
 
 
+Man kan justere posisjonen enten i Setup klassen der man legger alle objektene til i simulatoren. Eller bruke turnTowards for å gå mot ønsket posisjon. 
+Hjelpemetoden distanceTo brukes til å finne distansen til objektet man har i parantesene, eller distansen til en plassering. Som returnerer en double verdi. 
+Hjelpemetoden directionTo er for å finne retningen til enten et objekt eller en posisjon. Returnerer en retning.
+
 
 * AbstractMovingObject har en metode accelerateTo for å endre på farten. Kunne det være smart å gjøre speed feltvariablen private?
 
-Vi har ikke laget noen hjelpemetoder for å justere på retningen. Hva må du gjøre for å endre retning i en subklasse? Burde vi ha metoder også for å endre retning?
-I SimAnimal så bruker jeg turnTowards for å justere retningen min gradvis. Vi kunne laget metoder 
+Er en mer fleksibel måte å ha det som en metode. 
+
+* Vi har ikke laget noen hjelpemetoder for å justere på retningen. Hva må du gjøre for å endre retning i en subklasse? Burde vi ha metoder også for å endre retning?
+
+I SimAnimal så bruker jeg turnTowards for å justere retningen min gradvis. Dette er en fin måte å endre retningen så man kan justere vinkelen i forhold til andre objekter. 
+For å justere retningen så man bruke metoden turnTowards og velge den retningen man vil gå mot. Er ikke nødvendig med en metode for å endre retning. I hvertfall ikke sånn det er nå, er ingen objekter som skal endre retningen uten å gå mot den retningen. 
+
+
 
 * Vi har ingen public metoder for å endre på posisjon, retning, osv. Hadde det vært lurt å ha det? Hvorfor / hvorfor ikke?
+
+For forskjellige objekter har forskjellige holdninger til når de bare farer rundt og hvordan de skal oppføre seg i forhold til hverandre. 
 
 -------------------------------------------------------------------------------
 

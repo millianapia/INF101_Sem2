@@ -196,7 +196,6 @@ public class SimMain extends Application {
 		context.scale(1.0, -1.0);
 
 		context.drawImage(MediaHelper.getImage("images/underwater.png"), 0, 0, habitat.getWidth(), habitat.getHeight());
-		// context.fillRect(0, 0, bgCanvas.getWidth(), bgCanvas.getHeight());
 
 	}
 
