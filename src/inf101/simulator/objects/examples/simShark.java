@@ -18,6 +18,46 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class simShark extends AbstractMovingObject implements ISimListener {
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((habitat == null) ? 0 : habitat.hashCode());
+		result = prime * result + ((myFactory == null) ? 0 : myFactory.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(normalWeight);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(weight);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		simShark other = (simShark) obj;
+		if (habitat == null) {
+			if (other.habitat != null)
+				return false;
+		} else if (!habitat.equals(other.habitat))
+			return false;
+		if (myFactory == null) {
+			if (other.myFactory != null)
+				return false;
+		} else if (!myFactory.equals(other.myFactory))
+			return false;
+		if (Double.doubleToLongBits(normalWeight) != Double.doubleToLongBits(other.normalWeight))
+			return false;
+		if (Double.doubleToLongBits(weight) != Double.doubleToLongBits(other.weight))
+			return false;
+		return true;
+	}
+
 	private static final double defaultSpeed = 1.0;
 	private Habitat habitat;
 	private double normalWeight = 100;
