@@ -51,6 +51,24 @@ Samme som i begynnelsen av koden av SimAnimal, men er forskjellig i metoden step
 Mye samme som i simShark, eneste er at den løper fra haien som den løper fra SimRepellant. 
 
 
+<b>Hierarkiet</b>
+
+ - ISimObject  -> AbstractSimObject:	-> AbstractMovingObject:
+ 
+ 
+ - SimAnimal
+ 
+ Feltvariabler: double normalWeight, double weight
+ 			
+ - SimSmallerAnimal
+ 
+ Feltvariabler: double normalWeight, double weight
+ 				
+ - simShark
+ 
+ Feltvariabler: double normalWeight, double weight
+ 	
+
 <b>Ekstra kommentarer (feil, endringer): </b>
 
 Endret litt på testen på SimAnimalAvoidingTest, test nr 2 gikk alt for mange steps, så gjorde det mindre. La til en test som sjekket om SimSmallerAnimal unngikk simShark
