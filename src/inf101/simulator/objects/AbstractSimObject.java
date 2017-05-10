@@ -102,11 +102,13 @@ public abstract class AbstractSimObject implements ISimObject {
 
 		if (messageTime > 0) {
 			context.save();
-			context.scale(1.0, -1.0);
+			context.translate(0, -getHeight());
+			context.scale(1.0, 1.0);
 			double t = (messageTime % 50) / 50.0;
 			context.setFill(Color.WHITE.interpolate(Color.BLACK, t));
 			context.setFont(new Font(40));
 			context.fillText(message, 0, 40);
+
 			messageTime--;
 			context.restore();
 		}
