@@ -1,6 +1,6 @@
 # Semesteroppgave 2 – 101-meterskogen
 
-## Innleveringsfrist: 12. mai 2016 23:59:59 ([AoE](https://www.timeanddate.com/countdown/to?iso=20170512T235959&p0=3399&msg=INF101%20Semesteroppgave%202&font=sanserif&csz=1))
+## Innleveringsfrist: 12. mai 2017 23:59:59 ([AoE](https://www.timeanddate.com/countdown/to?iso=20170512T235959&p0=3399&msg=INF101%20Semesteroppgave%202&font=sanserif&csz=1))
 ## Læringsmål
 
 Målene for denne semesteroppgaven er:
