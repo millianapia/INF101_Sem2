@@ -44,12 +44,15 @@ public class SimMain extends Application {
 	private static final double BUTTON_WIDTH = 75.00;
 	private static SimMain instance;
 	private static Map<String, ISimObjectFactory> factoryMap = new HashMap<>();
+
 	public static SimMain getInstance() {
 		return instance;
 	}
+
 	public static void main(String[] args) {
 		launch(args);
 	}
+
 	/**
 	 * Register a new object factory
 	 * 
@@ -70,6 +73,7 @@ public class SimMain extends Application {
 		draw.accept(context);
 		registerSimObjectFactory(factory, name, canvas);
 	}
+
 	private static void registerSimObjectFactory(ISimObjectFactory factory, String name, Node buttonArt) {
 		String hexString = "sim://" + Integer.toHexString(System.identityHashCode(factory));
 		factoryMap.put(hexString, factory);
@@ -110,6 +114,7 @@ public class SimMain extends Application {
 		});
 		getInstance().menu.getChildren().add(button);
 	}
+
 	/**
 	 * Register a new object factory
 	 * 
@@ -126,6 +131,7 @@ public class SimMain extends Application {
 		img.setFitHeight(BUTTON_WIDTH);
 		registerSimObjectFactory(factory, name, img);
 	}
+
 	private AnimationTimer timer;
 	private long nanosPerStep = 1000_000_000L / 100L;
 	private long timeBudget = nanosPerStep;
@@ -185,9 +191,12 @@ public class SimMain extends Application {
 	}
 
 	private void drawBackground(GraphicsContext context) {
-		context.setFill(Color.BLACK);
-		// context.fillRect(0, 0, bgCanvas.getWidth(), bgCanvas.getHeight());
-		context.fillRect(0, 0, habitat.getWidth(), habitat.getHeight());
+
+		context.translate(0, habitat.getHeight());
+		context.scale(1.0, -1.0);
+
+		context.drawImage(MediaHelper.getImage("images/underwater.png"), 0, 0, habitat.getWidth(), habitat.getHeight());
+
 	}
 
 	/**
@@ -248,7 +257,7 @@ public class SimMain extends Application {
 	}
 
 	private void setup(double aspect) {
-//		System.out.println(aspect);
+		// System.out.println(aspect);
 		habitat = new Habitat(this, NOMINAL_WIDTH, NOMINAL_WIDTH / aspect);
 		Setup.setup(this, habitat);
 	}
@@ -298,7 +307,7 @@ public class SimMain extends Application {
 			} else if (code == KeyCode.B) {
 				showBars = !showBars;
 				event.consume();
-			} else if(habitat != null) {
+			} else if (habitat != null) {
 				habitat.keyPressed(event);
 			}
 		});
@@ -414,13 +423,15 @@ public class SimMain extends Application {
 		mainCanvas.widthProperty().addListener((ObservableValue<? extends Number> v, Number oldV, Number newV) -> {
 			double aspect = mainCanvas.getWidth() / mainCanvas.getHeight();
 			habitat.height = NOMINAL_WIDTH / aspect;
-//			System.out.println("Aspect: " + aspect + ", habitat size: " + habitat.getWidth() + "x" + habitat.getHeight());
+			// System.out.println("Aspect: " + aspect + ", habitat size: " +
+			// habitat.getWidth() + "x" + habitat.getHeight());
 		});
 
 		mainCanvas.heightProperty().addListener((ObservableValue<? extends Number> v, Number oldV, Number newV) -> {
 			double aspect = mainCanvas.getWidth() / mainCanvas.getHeight();
 			habitat.height = NOMINAL_WIDTH / aspect;
-//			System.out.println("Aspect: " + aspect + ", habitat size: " + habitat.getWidth() + "x" + habitat.getHeight());
+			// System.out.println("Aspect: " + aspect + ", habitat size: " +
+			// habitat.getWidth() + "x" + habitat.getHeight());
 		});
 	}
 

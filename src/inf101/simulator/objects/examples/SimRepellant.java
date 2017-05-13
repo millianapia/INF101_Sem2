@@ -4,6 +4,7 @@ import java.util.function.Consumer;
 
 import inf101.simulator.Direction;
 import inf101.simulator.GraphicsHelper;
+import inf101.simulator.MediaHelper;
 import inf101.simulator.Position;
 import inf101.simulator.objects.AbstractSimObject;
 import javafx.scene.canvas.GraphicsContext;
@@ -28,9 +29,12 @@ public class SimRepellant extends AbstractSimObject {
 
 	@Override
 	public void draw(GraphicsContext context) {
-		super.draw(context);
-		context.setFill(Color.RED.deriveColor(0.0, 1.0, 1.0, 0.5));
-		context.fillOval(0, 0, getWidth(), getHeight());
+		context.translate(0, this.getHeight());
+		context.scale(1.0, -1.0);
+	
+
+	context.drawImage(MediaHelper.getImage("images/jellyfish.png"), 0, 0, getWidth(), getHeight());
+	super.draw(context);
 
 		context.setStroke(Color.RED);
 		context.setLineWidth(4);
